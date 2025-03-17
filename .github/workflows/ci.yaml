@@ -38,7 +38,8 @@ jobs:
 
       - name: Run (Windows)
         if: ${{ matrix.os == 'windows-latest' }}
-        shell: pwsh
+        shell: bash
         run: |
-          Write-Output $PWD
+          # Write-Output $PWD
+          echo $PWD
           wasmtime run --dir=$PWD --env PWD ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
