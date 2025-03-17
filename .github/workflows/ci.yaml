@@ -31,19 +31,17 @@ jobs:
       - name: Build
         run: cargo build --target wasm32-wasip1
 
-      - name: Run
-        shell: ${{ runner.os == 'Windows' && 'pwsh' || 'bash' }}
+      - name: Run (Unix)
+        if: ${{ matrix.os != "windows-latest" }}
+        shell: bash
+        run: wasmtime run --dir=$PWD::/ ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
+
+      - name: Run (Windows)
+        if: ${{ matrix.os == "windows-latest" }}
+        shell: pwsh
         run: |
-          if ($IsWindows) {
-            Write-Output $PWD
-            Get-ChildItem ./target
-            Get-ChildItem ./target/wasm32-wasip1
-            Get-ChildItem ./target/wasm32-wasip1/debug
-            wasmtime run --dir=$PWD::/ ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
-          } else {
-            echo $PWD
-            ls ./target
-            ls ./target/wasm32-wasip1
-            ls ./target/wasm32-wasip1/debug
-            wasmtime run --dir=$PWD::/ ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
-          }
+          Write-Output $PWD
+          Get-ChildItem ./target
+          Get-ChildItem ./target/wasm32-wasip1
+          Get-ChildItem ./target/wasm32-wasip1/debug
+          wasmtime run --dir=$PWD::/ ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
