@@ -33,4 +33,9 @@ jobs:
 
       - name: Run
         shell: bash
-        run: wasmtime run --dir=$PWD::/ ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
+        run: |
+          echo $PWD
+          ls ./target
+          ls ./target/wasm32-wasip1
+          ls ./target/wasm32-wasip1/debug
+          wasmtime run --dir=$PWD::/ ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
