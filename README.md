@@ -1,7 +1,7 @@
 # Wasm `std::env::current_dir` repro
 
 ```
-cargo build
+cargo build --target wasm32-wasip1
 wasmtime run --dir=$PWD --env PWD ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
 ```
 
