@@ -32,12 +32,12 @@ jobs:
         run: cargo build --target wasm32-wasip1
 
       - name: Run (Unix)
-        if: ${{ matrix.os != "windows-latest" }}
+        if: ${{ matrix.os != 'windows-latest' }}
         shell: bash
         run: wasmtime run --dir=$PWD::/ ./target/wasm32-wasip1/debug/wasm-current-dir-repro.wasm
 
       - name: Run (Windows)
-        if: ${{ matrix.os == "windows-latest" }}
+        if: ${{ matrix.os == 'windows-latest' }}
         shell: pwsh
         run: |
           Write-Output $PWD
