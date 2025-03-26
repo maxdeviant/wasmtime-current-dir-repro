@@ -13,4 +13,6 @@ fn main() {
         "After: {:?}",
         std::env::current_dir().expect("failed to get current_dir")
     );
+
+    println!("OS: {}", std::env::consts::OS);
 }
